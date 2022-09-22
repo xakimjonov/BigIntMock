@@ -48,6 +48,20 @@ func validation(num string) error {
 	return nil
 }
 
+
+
+// NewInt
+func NewInt(num string) (Bigint, error) {
+	err := validation(num)
+	if err != nil {
+		return Bigint{Value: ""}, err
+
+	}
+	return Bigint{
+		Value: clean(num),
+	}, err
+}
+
 // clean
 func clean(num string) string {
 	prefix := ""
@@ -61,21 +75,9 @@ func clean(num string) string {
 	}
 
 	for strings.HasPrefix(num, "0") {
-		num = strings.Replace(num, "0", "", 1)
+		num = strings.Trim(num, "0")
 	}
 	return prefix + num
-}
-
-// NewInt
-func NewInt(num string) (Bigint, error) {
-	err := validation(num)
-	if err != nil {
-		return Bigint{Value: ""}, err
-
-	}
-	return Bigint{
-		Value: clean(num),
-	}, err
 }
 
 // Set
