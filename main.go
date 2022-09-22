@@ -6,17 +6,17 @@ import (
 )
 
 func main() {
-	a, err := bigint.NewInt("-1234567")
+	a, err := bigint.NewInt("-1234567000")
 	if err != nil {
 		panic(err)
 	}
 
-	b, err := bigint.NewInt("-000046")
+	b, err := bigint.NewInt("-0000460000")
 	if err != nil {
 		panic(err)
 	}
 
-	err = b.Set("0000464343")
+	err = b.Set("0000464343000")
 	if err != nil {
 		panic(err)
 	}

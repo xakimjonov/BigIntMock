@@ -75,7 +75,7 @@ func clean(num string) string {
 	}
 
 	for strings.HasPrefix(num, "0") {
-		num = strings.Trim(num, "0")
+		num = strings.Replace(num, "0"," ", 1)
 	}
 	return prefix + num
 }
