@@ -23,7 +23,7 @@ func validation(num string) error {
 	_, err := strconv.ParseInt(num, 10, 32)
 
 	if err != nil {
-		panic(ErrorLength)
+		return ErrorLength
 	}
 
 	var allowed = "0123456789"
@@ -48,20 +48,6 @@ func validation(num string) error {
 	return nil
 }
 
-
-
-// NewInt
-func NewInt(num string) (Bigint, error) {
-	err := validation(num)
-	if err != nil {
-		return Bigint{Value: ""}, err
-
-	}
-	return Bigint{
-		Value: clean(num),
-	}, err
-}
-
 // clean
 func clean(num string) string {
 	prefix := ""
@@ -75,9 +61,25 @@ func clean(num string) string {
 	}
 
 	for strings.HasPrefix(num, "0") {
-		num = strings.Replace(num, "0"," ", 1)
+		num = strings.TrimPrefix(num, "0")
+
+	}
+	if num == "" {
+		return num + "0"
 	}
 	return prefix + num
+}
+
+// NewInt
+func NewInt(num string) (Bigint, error) {
+	err := validation(num)
+	if err != nil {
+		return Bigint{Value: ""}, err
+
+	}
+	return Bigint{
+		Value: clean(num),
+	}, err
 }
 
 // Set
@@ -124,6 +126,11 @@ func Multiply(a, b Bigint) Bigint {
 func Mod(a, b Bigint) Bigint {
 	A, _ := strconv.Atoi(a.Value)
 	B, _ := strconv.Atoi(b.Value)
+	if A == 0 || B == 0 {
+		return Bigint{
+			"Division by is undifined ",
+		}
+	}
 	c := strconv.Itoa(A % B)
 	return Bigint{
 		Value: c,
@@ -134,6 +141,11 @@ func Mod(a, b Bigint) Bigint {
 func Divide(a, b Bigint) Bigint {
 	A, _ := strconv.Atoi(a.Value)
 	B, _ := strconv.Atoi(b.Value)
+	if A == 0 || B == 0 {
+		return Bigint{
+			"Division by is undifined ",
+		}
+	}
 	c := strconv.Itoa(A / B)
 	return Bigint{
 		Value: c,
