@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	a, err := bigint.NewInt("-1234567000")
+	a, err := bigint.NewInt("0")
 	if err != nil {
 		panic(err)
 	}

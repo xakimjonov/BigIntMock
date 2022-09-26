@@ -26,7 +26,7 @@ func validation(num string) error {
 		return ErrorLength
 	}
 
-	var allowed = "0123456789"
+	
 
 	if strings.HasPrefix(num, "-") {
 		num = strings.Replace(num, "-", "", 1)
@@ -37,13 +37,13 @@ func validation(num string) error {
 
 	}
 
-	str := strings.Split(num, "")
-
-	for _, v := range str {
-		if !strings.Contains(allowed, v) {
-			return ErrorNotNumber
-		}
-	}
+	// str := strings.Split(num, "")
+    //var allowed = "0123456789"
+	// for _, v := range str {
+	// 	if !strings.Contains(allowed, v) {
+	// 		return ErrorNotNumber
+	// 	}
+	// }
 
 	return nil
 }
@@ -77,6 +77,7 @@ func NewInt(num string) (Bigint, error) {
 		return Bigint{Value: ""}, err
 
 	}
+	
 	return Bigint{
 		Value: clean(num),
 	}, err
